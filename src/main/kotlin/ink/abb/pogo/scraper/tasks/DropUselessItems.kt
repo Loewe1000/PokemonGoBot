@@ -18,9 +18,11 @@ import ink.abb.pogo.scraper.util.Log
 class DropUselessItems : Task {
     override fun run(bot: Bot, ctx: Context, settings: Settings) {
         settings.uselessItems.forEach {
+            Thread.sleep(300)
             val item = ctx.api.inventories.itemBag.getItem(it.key)
             val count = item.count - it.value
             if (it.value != -1 && count > 0) {
+                Thread.sleep(300)
                 val result = ctx.api.inventories.itemBag.removeItem(it.key, count)
                 if (result == RecycleInventoryItemResponseOuterClass.RecycleInventoryItemResponse.Result.SUCCESS) {
                     ctx.itemStats.second.getAndAdd(count)
