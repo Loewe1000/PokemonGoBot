@@ -28,6 +28,7 @@ class ProcessPokestops(var pokestops: MutableCollection<Pokestop>) : Task {
     override fun run(bot: Bot, ctx: Context, settings: Settings) {
         if (settings.allowLeaveStartArea) {
             try {
+                Thread.sleep(300)
                 val newStops = ctx.api.map.mapObjects.pokestops
                 if (newStops.size > 0) {
                     pokestops = newStops
