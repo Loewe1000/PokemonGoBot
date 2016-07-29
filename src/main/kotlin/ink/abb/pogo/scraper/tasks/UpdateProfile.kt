@@ -24,16 +24,21 @@ class UpdateProfile : Task {
             1350000, 1650000, 2000000, 2500000, 3000000, 3750000, 4750000, 6000000, 7500000, 9500000, 12000000, 15000000, 20000000)
 
     override fun run(bot: Bot, ctx: Context, settings: Settings) {
+        Thread.sleep(300)
         val player = ctx.api.playerProfile
+        Thread.sleep(300)
         val inventories = ctx.api.inventories
         try {
             // update km walked, mainly
+            Thread.sleep(300)
             inventories.updateInventories(true)
+            Thread.sleep(300)
             player.updateProfile()
             val nextXP = requiredXp[player.stats.level] - requiredXp[player.stats.level - 1]
             val curLevelXP = player.stats.experience - requiredXp[player.stats.level - 1]
             val ratio = DecimalFormat("#0.00").format(curLevelXP.toDouble() / nextXP.toDouble() * 100.0)
             Log.magenta("Profile update: ${player.stats.experience} XP on LVL ${player.stats.level}; $curLevelXP/$nextXP ($ratio%) to LVL ${player.stats.level + 1}")
+            Thread.sleep(600)
             Log.magenta("XP gain: ${player.stats.experience - ctx.startXp.get()} XP; " +
                     "Pokemon caught/transferred: ${ctx.pokemonStats.first.get()}/${ctx.pokemonStats.second.get()}; " +
                     "Items caught/dropped: ${ctx.itemStats.first.get()}/${ctx.itemStats.second.get()};\n" +
