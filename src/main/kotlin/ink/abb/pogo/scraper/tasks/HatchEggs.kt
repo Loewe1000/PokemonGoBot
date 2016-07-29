@@ -19,10 +19,13 @@ import ink.abb.pogo.scraper.util.pokemon.getIvPercentage
 class HatchEggs : Task {
 
     override fun run(bot: Bot, ctx: Context, settings: Settings) {
+        Thread.sleep(300)
         val result = ctx.api.inventories.hatchery.queryHatchedEggs()
         if (result.isNotEmpty()) {
+            Thread.sleep(300)
             ctx.api.inventories.updateInventories(true)
             result.forEachIndexed { index, it ->
+            Thread.sleep(300)
                 val newPokemon = ctx.api.inventories.pokebank.getPokemonById(it.id)
                 val stats = "+${it.candy} candy; +${it.experience} XP; +${it.stardust} stardust"
                 if (newPokemon == null) {
@@ -34,7 +37,9 @@ class HatchEggs : Task {
             }
         }
 
+        Thread.sleep(300)
         val freeIncubators = ctx.api.inventories.incubators.filter { !it.isInUse }
+        Thread.sleep(300)
         val eggs = ctx.api.inventories.hatchery.eggs
                 .filter { !it.isIncubate }
                 .sortedByDescending { it.eggKmWalkedTarget }
