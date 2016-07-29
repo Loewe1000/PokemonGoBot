@@ -36,6 +36,7 @@ class LootOneNearbyPokestop(val sortedPokestops: List<Pokestop>, val lootTimeout
             if (settings.shouldDisplayPokestopName)
                 pokestopID = "\"${closest.details.name}\""
             Log.normal("Looting nearby pokestop $pokestopID")
+            Thread.sleep(300)
             ctx.api.setLocation(ctx.lat.get(), ctx.lng.get(), 0.0)
             val result = closest.loot()
 
