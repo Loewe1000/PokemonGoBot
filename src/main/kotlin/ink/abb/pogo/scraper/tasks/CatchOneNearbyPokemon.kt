@@ -41,6 +41,7 @@ class CatchOneNearbyPokemon : Task {
                 return
             }
             Log.green("Found pokemon ${catchablePokemon.pokemonId}")
+            Thread.sleep(300)
             ctx.api.setLocation(ctx.lat.get(), ctx.lng.get(), 0.0)
 
             val encounterResult = catchablePokemon.encounterPokemon()
@@ -59,6 +60,7 @@ class CatchOneNearbyPokemon : Task {
                     Log.normal("CP/IV of encountered pokemon ${catchablePokemon.pokemonId} turns out to be too low; blacklisting encounter")
                     return
                 }
+                Thread.sleep(300)
                 val result = catchablePokemon.catch(
                         encounterResult.captureProbability,
                         ctx.api.inventories.itemBag,
@@ -84,7 +86,7 @@ class CatchOneNearbyPokemon : Task {
                         message += ": [${result.xpList.sum()}x XP, ${result.candyList.sum()}x " +
                                 "Candy, ${result.stardustList.sum()}x Stardust]"
                     Log.cyan(message)
-
+                    
                     ctx.server.newPokemon(catchablePokemon.latitude, catchablePokemon.longitude, encounterResult.wildPokemon.pokemonData)
                     ctx.server.sendProfile()
                 } else {
