@@ -79,12 +79,14 @@ class Walk(val sortedPokestops: List<Pokestop>, val lootTimeouts: Map<String, Lo
         bot.runLoop(timeout, "WalkingLoop") { cancel ->
             // don't run away when there are still Pokemon around
             if(walking) {
+                Thread.sleep(300)
                 if(bot.api.map.getCatchablePokemon(ctx.blacklistedEncounters).size > 0 && settings.shouldCatchPokemons) {
                     // Stop walking
                     walking = false
                     Log.normal("Pausing to catch pokemon...")
                 } // Else continue walking.
             } else {
+                Thread.sleep(300)
                 if(bot.api.map.getCatchablePokemon(ctx.blacklistedEncounters).size <= 0) {
                     walking = true
                     Log.normal("Resuming walk.")
