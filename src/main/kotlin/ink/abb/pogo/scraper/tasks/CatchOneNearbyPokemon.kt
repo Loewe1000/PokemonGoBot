@@ -86,6 +86,7 @@ class CatchOneNearbyPokemon : Task {
                         message += ": [${result.xpList.sum()}x XP, ${result.candyList.sum()}x " +
                                 "Candy, ${result.stardustList.sum()}x Stardust]"
                     Log.cyan(message)
+                    Thread.sleep(300)
                     
                     ctx.server.newPokemon(catchablePokemon.latitude, catchablePokemon.longitude, encounterResult.wildPokemon.pokemonData)
                     ctx.server.sendProfile()
