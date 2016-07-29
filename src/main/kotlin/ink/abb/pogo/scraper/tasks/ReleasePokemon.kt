@@ -21,6 +21,7 @@ import ink.abb.pogo.scraper.util.pokemon.shouldTransfer
 
 class ReleasePokemon : Task {
     override fun run(bot: Bot, ctx: Context, settings: Settings) {
+        Thread.sleep(300)
         val groupedPokemon = ctx.api.inventories.pokebank.pokemons.groupBy { it.pokemonId }
         val sortByIV = settings.sortByIV
         val pokemonCounts = hashMapOf<String, Int>()
@@ -50,6 +51,7 @@ class ReleasePokemon : Task {
                         if (shouldRelease) {
                             Log.yellow("Going to transfer ${pokemon.pokemonId.name} with " +
                                     "CP ${pokemon.cp} and IV $ivPercentage%; reason: $reason")
+                            Thread.sleep(300)
                             val result = pokemon.transferPokemon()
                             if (result == Result.SUCCESS) {
                                 ctx.pokemonStats.second.andIncrement
